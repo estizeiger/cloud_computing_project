@@ -31,7 +31,9 @@ html {
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 18px;
+
+
   }
 }
 
