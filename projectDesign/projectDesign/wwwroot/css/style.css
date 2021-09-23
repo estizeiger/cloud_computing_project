@@ -403,7 +403,7 @@ a:focus {
   height: 250px;
   border-radius: 100%;
   background-color: #ff9e6a;
-  border: 15px solid #ffccb1;
+  border: 15px solid #99ccff;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   z-index: 1;
@@ -534,8 +534,8 @@ a:focus {
 }
 
 .about_section2 {
-  background: -webkit-gradient(linear, left top, right top, color-stop(50%, transparent), color-stop(50%, #ffccb1));
-  background: linear-gradient(to right, transparent 50%, #ffccb1 50%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, transparent), color-stop(50%, #99ccff));
+  background: linear-gradient(to right, transparent 50%, #99ccff 50%);
 }
 
 .about_section2 .detail-box a {
