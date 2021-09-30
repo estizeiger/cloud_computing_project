@@ -15,7 +15,7 @@
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-   
+
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 
     <!-- fonts style -->
@@ -33,14 +33,19 @@
     <link href="../css/responsive.css" rel="stylesheet" />
 </head>
 
-<body class="sub_page">
+<body>
+
     <div class="hero_area">
+        <div class="hero_bg_box">
+            <img src="../images/national_icecream.jpg" alt="">
+        </div>
+
         <!-- header section strats -->
         <header class="header_section">
             <div class="container-fluid">
-                
+
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand " asp-controller="Consumer" asp-action="Index"> Coldbergs </a>
+                    <a class="navbar-brand " asp-controller="Manager" asp-action="Index"> Coldbergs </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class=""> </span>
@@ -49,16 +54,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav  ">
                             <li class="nav-item ">
-                                <a class="nav-link" asp-controller="Consumer" asp-action="Login">Manager Login</a>
+                                <a class="nav-link" asp-controller="Manager" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" asp-controller="Consumer" asp-action="Index">Home</a>
+                                <a class="nav-link" asp-controller="Manager" asp-action="Menu">Update menu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Consumer" asp-action="Order">Order Icecream</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Consumer" asp-action="Contact">Contact Us</a>
+                                <a class="nav-link" asp-controller="Manager" asp-action="Analysis">Consumption Analysis</a>
                             </li>
                             <!-- <form class="form-inline justify-content-center">
                           <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -71,7 +73,6 @@
             </div>
         </header>
         <!-- end header section -->
-
     </div>
 
     <div class="container">

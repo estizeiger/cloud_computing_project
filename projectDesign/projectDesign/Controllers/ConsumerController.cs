@@ -22,5 +22,15 @@ namespace projectDesign.Controllers
         {
             return View();
         }
+
+        public IActionResult Payment()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
     }
 }
