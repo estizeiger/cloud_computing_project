@@ -13,7 +13,7 @@ namespace projectDesign.Controllers
             return View();
         }
 
-        public IActionResult Nenu()
+        public IActionResult Menu()
         {
             return View();
         }
