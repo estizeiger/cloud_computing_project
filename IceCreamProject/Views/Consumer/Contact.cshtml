@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- contact section -->
+<section class="contact_section layout_padding2">
+
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Contact Us
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container pr-md-3">
+                    <form action="mailto:estizeiger@gmail.com" method="post" enctype="text/plain">
+                        <div>
+                            <input type="text" placeholder="Your Name" />
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Phone Number" />
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" />
+                        </div>
+                        <div>
+                            <input type="text" class="message-box" placeholder="Message" />
+                        </div>
+                        <button>
+                            SEND
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pl-md-3">
+                    <div class="map_container ">
+                        <div id="googleMap">
+                            <script>
+                        function myMap() {
+                            var mapProp = {
+                                center: new google.maps.LatLng(34.856136, 34.721794),
+                                zoom: 5,
+                            };
+                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                        }
+                            </script>
+
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0nBQq-oHjFy2g5nacGu14G7LNa6Em1Fc&callback=myMap"></script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end contact section -->

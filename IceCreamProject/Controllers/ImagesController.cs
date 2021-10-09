@@ -16,9 +16,11 @@ namespace IceCreamProject.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            
             ImaggaAPISample.ImaggaSampleClass ImgAdappter = new ImaggaAPISample.ImaggaSampleClass();
             Dictionary<string,string> Result = ImgAdappter.CheckImg(https://upload.wikimedia.org/wikipedia/commons/d/da/Strawberry_ice_cream_cone_%285076899310%29.jpg);
             return new string[] { "value1", "value2" };
+
         }
 
         // GET api/<ImagesController>/5

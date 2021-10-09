@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Home Page- Consumer";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<!-- about section -->
+<section class="about_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="img-box pr-md-3">
+                    <img src="../images/about-img2.png" class="box_img" alt="about img">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box pl-md-3">
+                    <div class="heading_container">
+                        <h2 class="">
+                            About Us
+                        </h2>
+                    </div>
+                    <p class="detail_p_mt">
+                        Our icecream shop was found in 1956, by Meir Sandman.
+                    </p>
+                    <p>
+                        Meir and his wife Gila started making icecream at home, when they moved to Israel from England. The neighbours liked their icecream, and very soon they opened their own shop here, at Ben Yehuda street, in Tel Aviv.
+                    </p>
+                    <p>
+                        Since then, the shop grew and developed. The current manager is the grand-daughter of Meir and Gila.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- about section ends -->
+<!-- about section -->
+
+<section class="about_section about_section2 layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="detail-box pr-md-3">
+                    <div class="heading_container">
+                        <h2 class="">
+                            Choose your favorite ice cream!
+                        </h2>
+                    </div>
+                    <p class="detail_p_mt">
+                        We have a variety of flavors, and we always like to explore new colors, tastes and flavors combination.
+                    </p>
+                    <p class="detail_p_mt">
+                        We invite you to choose the icecream of your dreams!
+                    </p>
+                    <p class="detail_p_mt">
+                        🍦 🍦 🍦
+                    </p>
+                    <a href="product.html" class="">
+                        Icecreams Menu
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="img-box pl-md-3">
+                    <img src="../images/about-img3.png" class="box_img" alt="about img">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- about section ends -->
+<!-- contact section -->
+<section class="contact_section layout_padding2">
+
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Contact Us
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container pr-md-3">
+                    <form action="mailto:estizeiger@gmail.com" method="post" enctype="text/plain">
+                        <div>
+                            <input type="text" placeholder="Your Name" />
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Phone Number" />
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" />
+                        </div>
+                        <div>
+                            <input type="text" class="message-box" placeholder="Message" />
+                        </div>
+                        <button>
+                            SEND
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pl-md-3">
+                    <div class="map_container ">
+                        <div id="googleMap">
+                            <script>
+                                function myMap() {
+                                    var mapProp = {
+                                        center: new google.maps.LatLng(34.856136, 34.721794),
+                                        zoom: 5,
+                                    };
+                                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                                }
+                            </script>
+
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0nBQq-oHjFy2g5nacGu14G7LNa6Em1Fc&callback=myMap"></script>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end contact section -->
+<!-- client section -->
+<section class="client_section layout_padding">
+
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Our Wonderful Workers
+            </h2>
+        </div>
+        <div class="col-md-9 col-lg-7 mx-auto px-0">
+            <div class="client_container">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="../images/sandy.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h4>
+                                    Sandy Mark
+                                </h4>
+                                <p>
+                                    A proffesional ice cream maker. There are many ice creams flavors, but not many
+                                    people know which flavors can go well together. And so- with people.
+                                </p>
+                                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="../images/mindy.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h4>
+                                    Mindy Stone
+                                </h4>
+                                <p>
+                                    It is not about the icecream- its about how to present it to the customer!
+                                </p>
+                                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="../images/benny.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h4>
+                                    Benny- the manager's son
+                                </h4>
+                                <p>
+                                    If you can't beat them- join them. Benny likes to visit our shop very often and works on a large, colorful icecream cone.
+                                </p>
+                                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end client section -->

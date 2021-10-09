@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Manager Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="contact_section layout_padding2">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Manager Login
+            </h2>
+        </div>
+       
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container pr-md-3">
+                    <form>
+                        <div class="container">
+                            <label>Username : </label>
+                            <div>
+                                <input type="text" placeholder="Enter Username" name="username" required>
+                            </div>
+                            <label>Password : </label>
+                            <div>
+                                <input type="password" placeholder="Enter Password" name="password" required>
+                            </div>
+                            <div>
+                                <button type="submit">Login</button>
+                            </div>
+
+                            <div>
+                                <input type="checkbox" checked="checked"> Remember me
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="img-box">
+                    <img src="../images/about-img.png" class="box_img" alt="login img" width="400" height="400">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
