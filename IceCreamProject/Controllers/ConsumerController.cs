@@ -8,6 +8,9 @@ namespace projectDesign.Controllers
 {
     public class ConsumerController : Controller
     {
+        string managerUserName = "dani11";
+        string managerPassword = "dindin11";
+
         public IActionResult Index()
         {
             return View();
@@ -32,5 +35,11 @@ namespace projectDesign.Controllers
         {
             return View();
         }
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+
     }
 }

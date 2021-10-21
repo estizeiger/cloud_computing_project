@@ -10,22 +10,22 @@ using IceCreamProject.Models;
 
 namespace IceCreamProject.Controllers
 {
-    public class OrdersController : Controller
+    public class OrderOfUsersController : Controller
     {
         private readonly IceCreamProjectContext _context;
 
-        public OrdersController(IceCreamProjectContext context)
+        public OrderOfUsersController(IceCreamProjectContext context)
         {
             _context = context;
         }
 
-        // GET: Orders
+        // GET: OrderOfUsers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+            return View(await _context.OrderOfUser.ToListAsync());
         }
 
-        // GET: Orders/Details/5
+        // GET: OrderOfUsers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace IceCreamProject.Controllers
                 return NotFound();
             }
 
-            var orders = await _context.Orders
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (orders == null)
+            var orderOfUser = await _context.OrderOfUser
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (orderOfUser == null)
             {
                 return NotFound();
             }
 
-            return View(orders);
+            return View(orderOfUser);
         }
 
-        // GET: Orders/Create
+        // GET: OrderOfUsers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Orders/Create
+        // POST: OrderOfUsers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Address,ClientName,IceCream_id")] Orders orders)
+        public async Task<IActionResult> Create([Bind("Id,Street,House,City,Price,Temperature,Month,Day")] OrderOfUser orderOfUser)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orders);
+                _context.Add(orderOfUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(orders);
+            return View(orderOfUser);
         }
 
-        // GET: Orders/Edit/5
+        // GET: OrderOfUsers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace IceCreamProject.Controllers
                 return NotFound();
             }
 
-            var orders = await _context.Orders.FindAsync(id);
-            if (orders == null)
+            var orderOfUser = await _context.OrderOfUser.FindAsync(id);
+            if (orderOfUser == null)
             {
                 return NotFound();
             }
-            return View(orders);
+            return View(orderOfUser);
         }
 
-        // POST: Orders/Edit/5
+        // POST: OrderOfUsers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Address,ClientName,IceCream_id")] Orders orders)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Street,House,City,Price,Temperature,Month,Day")] OrderOfUser orderOfUser)
         {
-            if (id != orders.ID)
+            if (id != orderOfUser.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace IceCreamProject.Controllers
             {
                 try
                 {
-                    _context.Update(orders);
+                    _context.Update(orderOfUser);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrdersExists(orders.ID))
+                    if (!OrderOfUserExists(orderOfUser.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace IceCreamProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(orders);
+            return View(orderOfUser);
         }
 
-        // GET: Orders/Delete/5
+        // GET: OrderOfUsers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace IceCreamProject.Controllers
                 return NotFound();
             }
 
-            var orders = await _context.Orders
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (orders == null)
+            var orderOfUser = await _context.OrderOfUser
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (orderOfUser == null)
             {
                 return NotFound();
             }
 
-            return View(orders);
+            return View(orderOfUser);
         }
 
-        // POST: Orders/Delete/5
+        // POST: OrderOfUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var orders = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(orders);
+            var orderOfUser = await _context.OrderOfUser.FindAsync(id);
+            _context.OrderOfUser.Remove(orderOfUser);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrdersExists(int id)
+        private bool OrderOfUserExists(int id)
         {
-            return _context.Orders.Any(e => e.ID == id);
+            return _context.OrderOfUser.Any(e => e.Id == id);
         }
     }
 }

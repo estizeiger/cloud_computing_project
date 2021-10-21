@@ -8,6 +8,8 @@ namespace ImaggaAPISample
 {
     public class ImaggaSampleClass
     {
+        /*
+
         public Dictionary<string, string> CheckImg(string ImageUrl)
         {
             string apiKey = "acc_58df1a604b996df";
@@ -27,5 +29,7 @@ namespace ImaggaAPISample
             Console.WriteLine(response.Content);
             Console.ReadLine();
         }
+                 
+         */
     }
 }

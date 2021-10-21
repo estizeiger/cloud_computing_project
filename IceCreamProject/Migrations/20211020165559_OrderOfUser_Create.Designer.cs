@@ -9,15 +9,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IceCreamProject.Migrations
 {
     [DbContext(typeof(IceCreamProjectContext))]
-    [Migration("20211003165049_Orders_Create")]
-    partial class Orders_Create
+    [Migration("20211020165559_OrderOfUser_Create")]
+    partial class OrderOfUser_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("IceCreamProject.Models.IceCream", b =>
@@ -47,25 +47,58 @@ namespace IceCreamProject.Migrations
                     b.ToTable("IceCream");
                 });
 
-            modelBuilder.Entity("IceCreamProject.Models.Orders", b =>
+            modelBuilder.Entity("IceCreamProject.Models.OrderOfUser", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClientName")
+                    b.Property<string>("Day")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IceCream_id")
+                    b.Property<string>("House")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<string>("Month")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Orders");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Temperature")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderOfUser");
+                });
+
+            modelBuilder.Entity("IceCreamProject.Models.Taste", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Taste");
                 });
 #pragma warning restore 612, 618
         }

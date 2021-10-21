@@ -16,6 +16,12 @@ namespace IceCreamProject.Data
 
         public DbSet<IceCreamProject.Models.IceCream> IceCream { get; set; }
 
-        public DbSet<IceCreamProject.Models.Orders> Orders { get; set; }
+
+        public DbSet<IceCreamProject.Models.Taste> Taste { get; set; }
+
+
+        public DbSet<IceCreamProject.Models.OrderOfUser> OrderOfUser { get; set; }
+
+
     }
 }
