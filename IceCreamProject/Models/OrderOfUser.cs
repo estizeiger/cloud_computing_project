@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace IceCreamProject.Models
 {
-    
     public class OrderOfUser
     {
         public int Id { get; set; }
+
+        public int TasteId { get; set; }
 
         public string Street { get; set; }
 

@@ -25,19 +25,21 @@
                             <div class="item">
                                 <div class="col-md-9 col-lg-7 mx-auto px-0">
                                     <div class="client_container">
-                                        <h4 class="text-info">
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </h4>
-                                        <div>
-                                            @Html.DisplayFor(modelItem => item.Description)
-                                        </div>
-                                        <div>
-                                            <div class="img-box">
-                                                <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
+                                        <div >
+                                            <h4 class="text-info">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </h4>
+                                            <div>
+                                                @Html.DisplayFor(modelItem => item.Description)
                                             </div>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox"> add a scope
+                                            <div>
+                                                <div class="img-box">
+                                                    <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox"> add a scope
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +92,7 @@
 
             <div class="col-md-6">
                 <div class="img-box">
-                    <img src="~/images/pricesTable.jpg" class="box_img" alt="login img" width="300" height="300" />
+                    <img src="~/images/pricesTable.jpg" class="box_img" alt="login img" width="500" height="500" />
                 </div>
 
             </div>
