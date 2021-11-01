@@ -1,7 +1,7 @@
-﻿@model IceCreamProject.Models.OrderDetail
+﻿@model IceCreamProject.Models.UserOrder
 
 @{
-    ViewData["Title"] = "Order Icecream";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var data = (IEnumerable<IceCreamProject.Models.Taste>)ViewData["Message"];
@@ -39,8 +39,8 @@
                                                     <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
                                                 </div>
                                             </div>
-                                            <div>
-                                                <input type="checkbox"> add a scope
+                                            <div class="container">
+                                                <input type="checkbox" style="width: 100px" name="fooby[1][]">
                                             </div>
                                         </div>
                                     </div>
@@ -60,6 +60,9 @@
 
 </div>
 
+<h4>Order Details</h4>
+<hr />
+
 <section class="contact_section layout_padding2">
     <div class="container">
         <div class="heading_container">
@@ -78,25 +81,16 @@
                             <span asp-validation-for="TasteId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Street" class="control-label"></label>
-                            <input asp-for="Street" class="form-control" />
-                            <span asp-validation-for="Street" class="text-danger"></span>
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="House" class="control-label"></label>
-                            <input asp-for="House" class="form-control" />
-                            <span asp-validation-for="House" class="text-danger"></span>
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
-                        @*<div class="form-group">
-                                <label asp-for="City" class="control-label"></label>
-                                <input asp-for="City" class="form-control" />
-                                <span asp-validation-for="City" class="text-danger"></span>
-                            </div>*@
-                        <div class="form-group">
-                            <label asp-for="City" class="control-label"></label>
-                            <input asp-for="City" class="form-control" />
-                            <span asp-validation-for="City" class="text-danger"></span>
-                        </div>
+
                         <div class="form-group">
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
@@ -139,14 +133,33 @@
                 componnentRestrictions: { country: "is" }
 
             };
-            var input = document.getElementById('City');
+            var input = document.getElementById('Address');
             var places = new google.maps.places.Autocomplete(input, options);
         });
 
-
-
-
-
     </script>
+
+
+    <script>
+        // the selector will match all input controls of type :checkbox
+        // and attach a click event handler
+        $("input:checkbox").on('click', function () {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+    </script>
+
+
 
 }
