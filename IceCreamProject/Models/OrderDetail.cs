@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace IceCreamProject.Models
 {
-    public class OrderOfUser
+    public class OrderDetail
     {
         public int Id { get; set; }
 
@@ -25,5 +25,4 @@ namespace IceCreamProject.Models
 
         public string Day { get; set; }
     }
-   
 }

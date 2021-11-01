@@ -20,6 +20,10 @@ namespace IceCreamProject.Data
         public DbSet<IceCreamProject.Models.Taste> Taste { get; set; }
 
 
+        public DbSet<IceCreamProject.Models.OrderDetail> OrderDetail { get; set; }
+
+
+
 
     }
 }
