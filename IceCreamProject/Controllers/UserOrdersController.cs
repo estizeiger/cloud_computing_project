@@ -69,6 +69,10 @@ namespace IceCreamProject.Controllers
                 var city = arr[1];
                 userOrder.Address = city;
 
+                //enter price and tasteId values from ui :
+                //userOrder.TasteId=
+                //userOrder.Price=
+
                 //enter weather details
                 Main weather = findWeather(userOrder.Address);
                 userOrder.FeelsLike = weather.feels_like;

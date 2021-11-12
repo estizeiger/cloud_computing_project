@@ -38,6 +38,11 @@
                                                     <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
                                                 </div>
                                             </div>
+
+                                            <div class="container">
+                                                <input id="comboTasteId" type="checkbox" style="width: 100px" name="fooby[1][]">
+                                            </div>
+
                                             <div>
                                                 <input type="checkbox"> add a scope
                                             </div>
@@ -73,7 +78,7 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="TasteId" class="control-label"></label>
-                            <input asp-for="TasteId" class="form-control" />
+                            <input asp-for="TasteId" class="form-control-plaintext" />
                             <span asp-validation-for="TasteId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -119,3 +124,13 @@
 <label class="control-label">IceCream cost: </label>
 <label class="control-label">Total: </label>
 
+<script>
+        function orderTasteId(newVal) {
+            var sel = document.getElementById('comboTasteId');
+            var opt = document.createElement("OPTION");
+
+            sel.addChildNode(opt);
+            opt.innerHTML = newVal;
+            opt.value = newVal; //(alternatively)
+        }
+</script>

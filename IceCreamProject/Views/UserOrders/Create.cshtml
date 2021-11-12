@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var data = (IEnumerable<IceCreamProject.Models.Taste>)ViewData["Message"];
+
+    var price=0;
 }
 
 
@@ -39,9 +41,12 @@
                                                     <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
                                                 </div>
                                             </div>
-                                            <div class="container">
-                                                <input type="checkbox" style="width: 100px" name="fooby[1][]">
+                                            <div class="btn-box" id="buttonCool">
+                                                <button class="btn-dark" onclick="getElementById('tasteid').innerHTML =@Html.DisplayFor(modelItem => item.Id)">
+                                                    pick me
+                                                </button>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -73,11 +78,26 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form_container pr-lg-3">
+
+                    <div class="container">
+                        <form class="range">
+                            <p>Choose number of scopes</p>
+                            <div class="form-group range__slider">
+                                <input type="range" step="1">
+                            </div><!--/form-group-->
+                            <div class="form-group range__value">
+                                <label>Price:</label>
+                                <span></span>
+                            </div><!--/form-group-->
+                        </form>
+                    </div><!--/container-->
+
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                         <div class="form-group">
-                            <label asp-for="TasteId" class="control-label"></label>
-                            <input asp-for="TasteId" class="form-control" />
+                            <label>chosen ice cream number:</label>
+                            <label asp-for="TasteId" id="tasteid" class="form-control"></label>
                             <span asp-validation-for="TasteId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -105,7 +125,7 @@
 
             <div class="col-md-6">
                 <div class="img-box">
-                    <img src="~/images/pricesTable.jpg" class="box_img" alt="login img" width="500" height="500" />
+                    <img src="~/images/pricesTable.jpg" class="box_img" alt="prices table img" width="500" height="500" />
                 </div>
 
             </div>
@@ -160,6 +180,81 @@
         });
     </script>
 
+    <script>
+        class Slider {
+            constructor(rangeElement, valueElement, options) {
+                this.rangeElement = rangeElement
+                this.valueElement = valueElement
+                this.options = options
 
+                // Attach a listener to "change" event
+                this.rangeElement.addEventListener('input', this.updateSlider.bind(this))
+            }
+
+            // Initialize the slider
+            init() {
+                this.rangeElement.setAttribute('min', options.min)
+                this.rangeElement.setAttribute('max', options.max)
+                this.rangeElement.value = options.cur
+
+                this.updateSlider()
+            }
+
+            // Format the money
+            asMoney(value) {
+                if (value == 1) { 
+                    return parseFloat(12) + ' sheckels'
+                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
+                }
+                else if (value == 2) {
+                    return parseFloat(15) + ' sheckels'
+                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
+                }
+                else if (value == 3) {
+                    return parseFloat(18) +' sheckels'
+                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
+                }
+                else if (value == 4) {
+                    return parseFloat(20) + ' sheckels'
+                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
+                }
+                else if (value == 5) {
+                    return parseFloat(22) + ' sheckels'
+                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
+                }
+
+            }
+
+            generateBackground(rangeElement) {
+                if (this.rangeElement.value === this.options.min) {
+                    return
+                }
+
+                let percentage = (this.rangeElement.value - this.options.min) / (this.options.max - this.options.min) * 100
+                return 'background: linear-gradient(to right, #50299c, #7a00ff ' + percentage + '%, #d3edff ' + percentage + '%, #dee1e2 100%)'
+            }
+
+            updateSlider(newValue) {
+                
+                this.valueElement.innerHTML = this.asMoney(this.rangeElement.value)
+                this.rangeElement.style = this.generateBackground(this.rangeElement.value)
+            }
+        }
+
+        let rangeElement = document.querySelector('.range [type="range"]')
+        let valueElement = document.querySelector('.range .range__value span')
+
+        let options = {
+            min: 1,
+            max: 5,
+            cur: 3
+        }
+
+        if (rangeElement) {
+            let slider = new Slider(rangeElement, valueElement, options)
+
+            slider.init()
+        }
+    </script>
 
 }
