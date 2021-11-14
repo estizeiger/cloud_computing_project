@@ -16,7 +16,7 @@ namespace IceCreamProject.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("IceCreamProject.Models.IceCream", b =>
@@ -44,6 +44,27 @@ namespace IceCreamProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IceCream");
+                });
+
+            modelBuilder.Entity("IceCreamProject.Models.IcecreamTaste", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IcecreamTaste");
                 });
 
             modelBuilder.Entity("IceCreamProject.Models.Taste", b =>

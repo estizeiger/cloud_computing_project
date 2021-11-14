@@ -1,0 +1,100 @@
+﻿@model IEnumerable<IceCreamProject.Models.IcecreamTaste>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    
+}
+
+<section class="product_section layout_padding">
+    <div class="container-fluid">
+        <div class="heading_container heading_center ">
+            <h1>Order Icecream</h1>
+            <h4>choose the wanted taste</h4>
+        </div>
+
+        <div class="container-fluid">
+
+            <div class="product_container">
+                <div class="carousel-wrap ">
+                    <div class="product_owl-carousel owl-carousel">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="item">
+                                <div class="col-md-9 col-lg-7 mx-auto px-0">
+                                    <div class="client_container">
+                                        <div>
+                                            <h4 class="text-info">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </h4>
+                                            <div>
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </div>
+                                            <div>
+                                                <div class="img-box">
+                                                    <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
+                                                </div>
+                                            </div>
+                                            <div class="btn-box" id="buttonCool" >
+
+                                                <a asp-controller="IcecreamTastes" asp-action="Details" asp-route-id="@item.Id" style="background-color:black">pick me</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-controller="IcecreamTastes" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
+            </td>
+            <td>
+                <a asp-controller="IcecreamTastes" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="IcecreamTastes" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="IcecreamTastes" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

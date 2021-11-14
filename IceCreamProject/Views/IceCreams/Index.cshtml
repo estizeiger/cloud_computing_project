@@ -1,61 +1,110 @@
-﻿@model IEnumerable<IceCreamProject.Models.IceCream>
-
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>
+        How to Design Image
+        Slider using jQuery ?
+    </title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Flavor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Temperature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImgLocation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Flavor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImgLocation)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <center>
+        <h1 style="color:green">
+            GeeksforGeeks
+        </h1>
+
+        <b>
+            How to code Image
+            Slider using jQuery
+        </b>
+
+        <br><br>
+
+        <!-- Image container of the image slider -->
+        <div class="image-container">
+            <div class="slide">
+                <div class="slideNumber">1</div>
+                <img src="https://www.geeksforgeeks.org/wp-content/uploads/html-768x256.png">
+            </div>
+            <div class="slide">
+                <div class="slideNumber">2</div>
+                <img src="https://www.geeksforgeeks.org/wp-content/uploads/CSS-768x256.png">
+            </div>
+            <div class="slide">
+                <div class="slideNumber">3</div>
+                <img src="https://www.geeksforgeeks.org/wp-content/uploads/jquery-banner.png">
+            </div>
+
+            <!-- Next and Previous icon to change images -->
+            <a class="previous" onclick="moveSlides(-1)">
+                <i class="fa fa-chevron-circle-left"></i>
+            </a>
+            <a class="next" onclick="moveSlides(1)">
+                <i class="fa fa-chevron-circle-right"></i>
+            </a>
+        </div>
+        <br>
+
+        <div style="text-align:center">
+            <span class="footerdot"
+                  onclick="activeSlide(1)">
+            </span>
+            <span class="footerdot"
+                  onclick="activeSlide(2)">
+            </span>
+            <span class="footerdot"
+                  onclick="activeSlide(3)">
+            </span>
+        </div>
+
+    </center>
+
+    
 </body>
+
 </html>
+
+<script>
+    var slideIndex = 1;
+    displaySlide(slideIndex);
+   
+    function moveSlides(n) {
+        displaySlide(slideIndex += n);
+    }
+   
+    function activeSlide(n) {
+        displaySlide(slideIndex = n);
+    }
+   
+    /* Main function */
+    function displaySlide(n) {
+        var i;
+        var totalslides = 
+            document.getElementsByClassName("slide");
+        var totaldots = 
+            document.getElementsByClassName("footerdot");
+          
+        if (n > totalslides.length) {
+            slideIndex = 1;
+        }
+          
+        if (n < 1) {
+            slideIndex = totalslides.length;
+        }
+        for (i = 0; i < totalslides.length; i++) {
+            totalslides[i].style.display = "none";
+        }
+        for (i = 0; i < totaldots.length; i++) {
+            totaldots[i].className = 
+            totaldots[i].className.replace(" active", "");
+        }
+        totalslides[slideIndex - 1].style.display = "block";
+        totaldots[slideIndex - 1].className += " active";
+    }
+</script>

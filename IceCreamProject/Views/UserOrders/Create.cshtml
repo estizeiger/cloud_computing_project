@@ -4,122 +4,51 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    <!-- my styles for this template -->
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+
     var data = (IEnumerable<IceCreamProject.Models.Taste>)ViewData["Message"];
 
-    var price=0;
+    double price = 18;
 }
-
-
-<section class="product_section layout_padding">
-    <div class="container-fluid">
-        <div class="heading_container heading_center ">
-            <h2>
-                Order icecream
-            </h2>
-        </div>
-
-        <div class="container-fluid">
-
-            <div class="product_container">
-                <div class="carousel-wrap ">
-                    <div class="product_owl-carousel owl-carousel">
-
-                        @foreach (var item in data)
-                        {
-                            <div class="item">
-                                <div class="col-md-9 col-lg-7 mx-auto px-0">
-                                    <div class="client_container">
-                                        <div>
-                                            <h4 class="text-info">
-                                                @Html.DisplayFor(modelItem => item.Name)
-                                            </h4>
-                                            <div>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </div>
-                                            <div>
-                                                <div class="img-box">
-                                                    <img src="@Url.Content(@item.ImgLocation)" width="100" height="100" />
-                                                </div>
-                                            </div>
-                                            <div class="btn-box" id="buttonCool">
-                                                <button class="btn-dark" onclick="getElementById('tasteid').innerHTML =@Html.DisplayFor(modelItem => item.Id)">
-                                                    pick me
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 <div class="dropdown-divider">
 
 </div>
 
-<h4>Order Details</h4>
+<h1>Icecream Order</h1>
 <hr />
 
-<section class="contact_section layout_padding2">
-    <div class="container">
-        <div class="heading_container">
-            <h2>
-                Delivery Details
-            </h2>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+<section class="contact_section" style="background-color:lightblue">
+    <div class="container" style="background-color:white">
+        <div class="row" >
+            <div class="col-md-6" style="background-color: lightblue">
                 <div class="form_container pr-lg-3">
-
-                    <div class="container">
-                        <form class="range">
-                            <p>Choose number of scopes</p>
-                            <div class="form-group range__slider">
-                                <input type="range" step="1">
-                            </div><!--/form-group-->
-                            <div class="form-group range__value">
-                                <label>Price:</label>
-                                <span></span>
-                            </div><!--/form-group-->
-                        </form>
-                    </div><!--/container-->
 
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <div class="form-group">
-                            <label>chosen ice cream number:</label>
-                            <label asp-for="TasteId" id="tasteid" class="form-control"></label>
-                            <span asp-validation-for="TasteId" class="text-danger"></span>
-                        </div>
+                        <div><p></p></div>
                         <div class="form-group">
                             <label asp-for="UserName" class="control-label"></label>
-                            <input asp-for="UserName" class="form-control" />
+                            <input asp-for="UserName" class="form-control" placeholder="Enter your name"/>
                             <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Address" class="control-label"></label>
-                            <input asp-for="Address" class="form-control" />
+                            <input asp-for="Address" class="form-control" placeholder="Enter your location"/>
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
-
+                        <div>
+                            <input type="text" class="message-box" placeholder="Delivery Notes- optional" />
+                        </div>
                         <div class="form-group">
+                            <button>             
+                                Pay with PayPal
+                            </button>
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
 
-                        <button>
-                            Pay with PayPal
-                        </button>
                     </form>
-
                 </div>
             </div>
 
@@ -133,10 +62,6 @@
         </div>
     </div>
 </section>
-
-<label class="control-label">Delivery cost: 15 sheckels</label>
-<label class="control-label">IceCream cost: </label>
-<label class="control-label">Total: </label>
 
 @section Scripts {
 
@@ -180,80 +105,11 @@
         });
     </script>
 
+
+
     <script>
-        class Slider {
-            constructor(rangeElement, valueElement, options) {
-                this.rangeElement = rangeElement
-                this.valueElement = valueElement
-                this.options = options
-
-                // Attach a listener to "change" event
-                this.rangeElement.addEventListener('input', this.updateSlider.bind(this))
-            }
-
-            // Initialize the slider
-            init() {
-                this.rangeElement.setAttribute('min', options.min)
-                this.rangeElement.setAttribute('max', options.max)
-                this.rangeElement.value = options.cur
-
-                this.updateSlider()
-            }
-
-            // Format the money
-            asMoney(value) {
-                if (value == 1) { 
-                    return parseFloat(12) + ' sheckels'
-                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
-                }
-                else if (value == 2) {
-                    return parseFloat(15) + ' sheckels'
-                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
-                }
-                else if (value == 3) {
-                    return parseFloat(18) +' sheckels'
-                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
-                }
-                else if (value == 4) {
-                    return parseFloat(20) + ' sheckels'
-                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
-                }
-                else if (value == 5) {
-                    return parseFloat(22) + ' sheckels'
-                        .toLocaleString('en-US', { maximumFractionDigits: 2 })
-                }
-
-            }
-
-            generateBackground(rangeElement) {
-                if (this.rangeElement.value === this.options.min) {
-                    return
-                }
-
-                let percentage = (this.rangeElement.value - this.options.min) / (this.options.max - this.options.min) * 100
-                return 'background: linear-gradient(to right, #50299c, #7a00ff ' + percentage + '%, #d3edff ' + percentage + '%, #dee1e2 100%)'
-            }
-
-            updateSlider(newValue) {
-                
-                this.valueElement.innerHTML = this.asMoney(this.rangeElement.value)
-                this.rangeElement.style = this.generateBackground(this.rangeElement.value)
-            }
-        }
-
-        let rangeElement = document.querySelector('.range [type="range"]')
-        let valueElement = document.querySelector('.range .range__value span')
-
-        let options = {
-            min: 1,
-            max: 5,
-            cur: 3
-        }
-
-        if (rangeElement) {
-            let slider = new Slider(rangeElement, valueElement, options)
-
-            slider.init()
+        function saveTasteIdPrice() {
+            document.getElementById("demo").style.color = "red";
         }
     </script>
 

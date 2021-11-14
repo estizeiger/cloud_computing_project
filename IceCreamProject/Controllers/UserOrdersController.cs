@@ -17,6 +17,8 @@ namespace IceCreamProject.Controllers
     {
         private readonly IceCreamProjectContext _context;//order
         private readonly IceCreamProjectContext _context2;//taste
+        private static int _tasteId;
+        private static double _price;
 
         public UserOrdersController(IceCreamProjectContext context, IceCreamProjectContext context2)
         {
@@ -49,8 +51,11 @@ namespace IceCreamProject.Controllers
         }
 
         // GET: UserOrders/Create
-        public IActionResult Create()
+        public IActionResult Create(int tasteId, double price)
         {
+            _tasteId = tasteId; //tasteId value is routed from "details"- last page.
+            _price = price;
+
             ViewBag.Message = _context2.Taste;//here we send the taste model, as a message
 
             return View();
@@ -69,9 +74,8 @@ namespace IceCreamProject.Controllers
                 var city = arr[1];
                 userOrder.Address = city;
 
-                //enter price and tasteId values from ui :
-                //userOrder.TasteId=
-                //userOrder.Price=
+                userOrder.TasteId = _tasteId;
+                userOrder.Price=_price;
 
                 //enter weather details
                 Main weather = findWeather(userOrder.Address);

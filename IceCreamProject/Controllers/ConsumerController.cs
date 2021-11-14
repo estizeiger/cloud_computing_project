@@ -8,6 +8,8 @@ namespace projectDesign.Controllers
 {
     public class ConsumerController : Controller
     {
+        private List<string> _context;//list of manager name+ password
+
         string managerUserName = "dani11";
         string managerPassword = "dindin11";
 
@@ -33,6 +35,11 @@ namespace projectDesign.Controllers
 
         public IActionResult Login()
         {
+            _context = new List<string>();
+            _context.Insert(0, managerUserName);
+            _context.Insert(1, managerPassword);
+
+            ViewBag.Message = _context;//list of manager name+ password
             return View();
         }
         public IActionResult Add()
