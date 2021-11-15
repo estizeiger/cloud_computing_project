@@ -6,3 +6,50 @@
 <p>
     its the manager home page
 </p>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div class="file-drop-area">
+    <span class="fake-btn">Choose files</span>
+    <span class="file-msg">or drag and drop files here</span>
+    <input class="file-input" type="file" multiple id="logoupload">
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            let onchange = function () {
+                let _this = $(this)[0];
+                let frmdata = new FormData();
+                frmdata.append('File', _this.files[0]);
+                $("#logoupload").change(function () {
+                    readURL(this);
+                });
+                let onSuccess = function (model) {
+                    console.log(model);
+                    $('.notification').html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Logo&nbsp;</strong>Sucessfully uploaded!!!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+                };
+                $.ajax({
+                    method: 'POST',
+                    url: '/manager/index',
+                    data: frmdata, 
+                    processData: false,
+                    contentType: false,
+                }).done(onSuccess);
+            };
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#displayimage').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $(document).on('change', 'input[type=file]', onchange);
+        });
+    </script>
+
+}

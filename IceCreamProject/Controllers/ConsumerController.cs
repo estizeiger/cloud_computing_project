@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IceCreamProject.Data;
+using IceCreamProject.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,12 @@ namespace projectDesign.Controllers
 {
     public class ConsumerController : Controller
     {
-        private List<string> _context;//list of manager name+ password
+        private readonly IceCreamProjectContext _context;//user
 
-        string managerUserName = "dani11";
-        string managerPassword = "dindin11";
+        public ConsumerController(IceCreamProjectContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Index()
         {
@@ -35,13 +39,21 @@ namespace projectDesign.Controllers
 
         public IActionResult Login()
         {
-            _context = new List<string>();
-            _context.Insert(0, managerUserName);
-            _context.Insert(1, managerPassword);
-
-            ViewBag.Message = _context;//list of manager name+ password
             return View();
         }
+
+        public IActionResult Login1(string Username, string Password)
+        {
+            foreach (var item in _context.User)
+            {
+                if (item.UserName == Username && item.Password == Password)
+                {
+                    return View("~/Views/Manager/Index.cshtml");
+                }
+            }
+            return View("~/Views/Manager/Index.cshtml");
+        }
+
         public IActionResult Add()
         {
             return View();

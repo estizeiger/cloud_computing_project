@@ -87,7 +87,9 @@ namespace IceCreamProject.Controllers
                 userOrder.Date = date;
 
                 _context.Add(userOrder);
+
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(userOrder);

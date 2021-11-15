@@ -1,0 +1,116 @@
+﻿@model IceCreamProject.Models.IcecreamTaste
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+
+    string imglocation = Model.ImgLocation;
+
+    double theprice = (double)ViewData["Message"];
+
+    <!-- my styles for this template -->
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+}
+
+<center>
+    <h1>Icecream Order</h1>
+
+    <div class="container">
+        <div class="col-md-9 col-lg-7 mx-auto px-0">
+            <div class="client_container">
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="box">
+                                <h4 style="color:cadetblue">
+                                    @Html.DisplayFor(model => model.Name)
+                                </h4>
+                                <div class="img-box">
+                                    <img src="@Url.Content(imglocation)" width="300" height="250" />
+                                </div>
+                                <div class="detail-box">
+                                    <p>
+                                        @Html.DisplayFor(model => model.Description)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Choose amount of scopes:</h4>
+    <p></p>
+    <div class="dropdown-divider"></div>
+    <p></p>
+
+    <div class="range-wrap">
+        <div class="range-value" id="rangeV"></div>
+        <input id="range" type="range" min="1" max="5" value="3" step="1">
+        <h3 id="priceVal"></h3>
+    </div>
+
+    <div>
+        <a onclick="@theprice =getElementById('priceVal').innerHTML" asp-controller="UserOrders" asp-action="Create" asp-route-tasteId="@Model.Id" asp-route-price="@theprice">continue order</a> |
+        <a asp-controller="Manager" asp-action="Menu">Back to List</a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dom</td>
+                <td>6000</td>
+            </tr>
+            <tr class="active-row">
+                <td>Melissa</td>
+                <td>5150</td>
+            </tr>
+            <!-- and so on... -->
+        </tbody>
+    </table>
+
+</center>
+
+<script>
+    const
+        range = document.getElementById('range'),
+        rangeV = document.getElementById('rangeV'),
+        prc = document.getElementById('priceVal'),
+        setValue = () => {
+            const
+                newValue = Number((range.value - range.min) * 100 / (range.max - range.min)),
+                newPosition = 10 - (newValue * 0.2);
+            rangeV.innerHTML = `<span>${range.value}</span>`;
+            if (range.value == 1) {
+                prc.innerHTML = `<span>${12 + ' ₪'}</span>`;
+                myprice=12;
+            } else if (range.value == 2) {
+                prc.innerHTML = `<span>${15 + ' ₪'}</span>`;
+                myprice=15;
+            } else if (range.value == 3) {
+                prc.innerHTML = `<span>${18 + ' ₪'}</span>`;
+                myprice=18;
+            } else if (range.value == 4) {
+                prc.innerHTML = `<span>${20 + ' ₪'}</span>`;
+                myprice=20;
+            } else {
+                prc.innerHTML = `<span>${22 + ' ₪'}</span>`;
+                myprice=22;
+            }
+            //@theprice =myprice;
+
+            rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+        };
+    document.addEventListener("DOMContentLoaded", setValue);
+    range.addEventListener('input', setValue);
+</script>
