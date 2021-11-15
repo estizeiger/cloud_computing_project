@@ -6,7 +6,7 @@
 
     string imglocation = Model.ImgLocation;
 
-    double theprice = 18;
+    double theprice = (double)ViewData["Message"];
 
     <!-- my styles for this template -->
     <link href="~/css/mystyle.css" rel="stylesheet" />
@@ -55,7 +55,7 @@
     </div>
 
     <div>
-        <a asp-controller="UserOrders" asp-action="Create" asp-route-tasteId="@Model.Id" asp-route-price="@theprice">continue order</a> |
+        <a onclick="@theprice =getElementById('priceVal').innerHTML" asp-controller="UserOrders" asp-action="Create" asp-route-tasteId="@Model.Id" asp-route-price="@theprice">continue order</a> |
         <a asp-controller="IcecreamTastes" asp-action="Index">Back to List</a>
     </div>
 
@@ -93,19 +93,19 @@
             rangeV.innerHTML = `<span>${range.value}</span>`;
             if (range.value == 1) {
                 prc.innerHTML = `<span>${12 + ' ₪'}</span>`;
-                //myprice=12;
+                myprice=12;
             } else if (range.value == 2) {
                 prc.innerHTML = `<span>${15 + ' ₪'}</span>`;
-                //myprice=15;
+                myprice=15;
             } else if (range.value == 3) {
                 prc.innerHTML = `<span>${18 + ' ₪'}</span>`;
-                //myprice=18;
+                myprice=18;
             } else if (range.value == 4) {
                 prc.innerHTML = `<span>${20 + ' ₪'}</span>`;
-                //myprice=20;
+                myprice=20;
             } else {
                 prc.innerHTML = `<span>${22 + ' ₪'}</span>`;
-                //myprice=22;
+                myprice=22;
             }
             //@theprice =myprice;
 

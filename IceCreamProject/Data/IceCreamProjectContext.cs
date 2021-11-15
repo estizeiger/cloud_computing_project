@@ -26,6 +26,9 @@ namespace IceCreamProject.Data
         public DbSet<IceCreamProject.Models.IcecreamTaste> IcecreamTaste { get; set; }
 
 
+        public DbSet<IceCreamProject.Models.User> User { get; set; }
+
+
 
     }
 }
