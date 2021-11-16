@@ -38,11 +38,12 @@ namespace projectDesign.Controllers
             _env = env;
         }
 
-        // GET: IcecreamTastes
+        // GET: Manager/Menu
         public async Task<IActionResult> Menu()
         {
             return View(await _context.IcecreamTaste.ToListAsync());
         }
+
         public bool CheckImg(string ImageUrl)
         {
             string apiKey = "acc_58df1a604b996df";
@@ -117,9 +118,9 @@ namespace projectDesign.Controllers
             }
             return  false;
         }
-    
-    // GET: IcecreamTastes/Details/5
-    public async Task<IActionResult> Details(int? id)
+
+        // GET: Manager/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             ViewBag.Message = price;//send to view
 
@@ -138,13 +139,13 @@ namespace projectDesign.Controllers
             return View(icecreamTaste);
         }
 
-        // GET: IcecreamTastes/Create
+        // GET: Manager/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: IcecreamTastes/Create
+        // POST: Manager/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -160,7 +161,7 @@ namespace projectDesign.Controllers
             return View(icecreamTaste);
         }
 
-        // GET: IcecreamTastes/Edit/5
+        // GET: Manager/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -176,7 +177,7 @@ namespace projectDesign.Controllers
             return View(icecreamTaste);
         }
 
-        // POST: IcecreamTastes/Edit/5
+        // POST: Manager/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -211,7 +212,7 @@ namespace projectDesign.Controllers
             return View(icecreamTaste);
         }
 
-        // GET: IcecreamTastes/Delete/5
+        // GET: Manager/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -229,7 +230,7 @@ namespace projectDesign.Controllers
             return View(icecreamTaste);
         }
 
-        // POST: IcecreamTastes/Delete/5
+        // POST: Manager/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

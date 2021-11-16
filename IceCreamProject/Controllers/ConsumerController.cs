@@ -1,6 +1,7 @@
 ﻿using IceCreamProject.Data;
 using IceCreamProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,10 @@ namespace projectDesign.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        // GET: Consumer
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.IcecreamTaste.ToListAsync());
         }
 
         public IActionResult Contact()

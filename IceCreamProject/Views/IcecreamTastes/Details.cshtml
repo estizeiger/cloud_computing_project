@@ -12,6 +12,67 @@
     <link href="~/css/mystyle.css" rel="stylesheet" />
 }
 
+<div class="heading_container heading_center ">
+    <h1>Icecream Order</h1>
+    <h4>
+        @Html.DisplayFor(model => model.Name)
+    </h4>
+</div>
+
+<section class="contact_section">
+
+    <div class="container" style="background-color:white">
+
+        <div class="row">
+            <div class="col-md-6" style="background-color: lightblue">
+                <p></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="background-color: lightblue">
+                <div class="form_container pr-md-3">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="@Url.Content(imglocation)" width="300" height="230" />
+                        </div>
+                        <div class="detail-box">
+                            <p>
+                                @Html.DisplayFor(model => model.Description)
+                            </p>
+                        </div>
+                    </div>
+
+                    <h4>Choose amount of scopes:</h4>
+                    <div class="dropdown-divider"></div>
+                    <div class="range-wrap">
+                        <div class="range-value" id="rangeV"></div>
+                        <input id="range" type="range" min="1" max="5" value="3" step="1">
+                        <h3 id="priceVal"></h3>
+                    </div>
+
+                    <div>
+                        <a onclick="@theprice =getElementById('priceVal').innerHTML" asp-controller="UserOrders" asp-action="Create" asp-route-tasteId="@Model.Id" asp-route-price="@theprice">continue order</a> |
+                        <a asp-controller="IcecreamTastes" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="img-box">
+                    <img src="~/images/pricesTable.jpg" class="box_img" alt="prices table img" width="400" height="400" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="background-color: lightblue">
+                <p></p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <center>
     <h1>Icecream Order</h1>
 

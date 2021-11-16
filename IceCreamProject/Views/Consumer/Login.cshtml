@@ -8,50 +8,44 @@
 
 }
 
-<section class="contact_section layout_padding2">
-    <div class="container">
-        <div class="heading_container">
-            <h2>
-                Manager Login
-            </h2>
+<div class="heading_container heading_center ">
+    <h1>Manager Login</h1>
+    <h4>a manager? login here to edit menu and see statistics!</h4>
+</div>
+
+<section class="contact_section">
+
+    <div class="container" style="background-color:white">
+
+        <div class="row">
+            <div class="col-md-6" style="background-color: lightblue">
+                <p></p>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" style="background-color: lightblue">
                 <div class="form_container pr-md-3">
-                    <!--
-        <form asp-action="Login" asp-controller="ConsumerController">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="UserName" class="control-label"></label>
-            <input asp-for="UserName" class="form-control" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Password" class="control-label"></label>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="check" class="btn btn-primary" />
-        </div>
-    </form>
-
-    -->
-
                     <form action="Login1" method="get">
                         <input type="text" name="Username" placeholder="user name" />
                         <input type="text" name="Password " placeholder="password" />
-                        <input type="submit" value="LogIn" />
+                        <button>
+                            LOGIN
+                        </button>
                     </form>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="img-box">
                     <img src="../images/about-img.png" class="box_img" alt="login img" width="400" height="400">
                 </div>
 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="background-color: lightblue">
+                <p></p>
             </div>
         </div>
     </div>
