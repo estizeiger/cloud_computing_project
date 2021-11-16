@@ -1,21 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page- Manager";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+
 }
 
-<p>
-    its the manager home page
-</p>
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="heading_container heading_center ">
+    <h1>Appload Image File</h1>
+    <h4>appload an image of your new icecream</h4>
+    <p></p>
+    <p></p>
+    <p></p>
 </div>
+
 <div class="file-drop-area">
     <span class="fake-btn">Choose files</span>
     <span class="file-msg">or drag and drop files here</span>
     <input class="file-input" type="file" multiple id="logoupload">
 </div>
+
+<p></p>
+<p></p>
+<p></p>
+
+<h3 style="color:black">@ViewBag.text</h3>
+
+<p></p>
+<p></p>
+<p></p>
 
 @section Scripts{
     <script>
@@ -34,7 +45,7 @@
                 $.ajax({
                     method: 'POST',
                     url: '/manager/index',
-                    data: frmdata, 
+                    data: frmdata,
                     processData: false,
                     contentType: false,
                 }).done(onSuccess);

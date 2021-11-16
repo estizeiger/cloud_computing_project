@@ -73,74 +73,7 @@
     </div>
 </section>
 
-<center>
-    <h1>Icecream Order</h1>
 
-    <div class="container">
-        <div class="col-md-9 col-lg-7 mx-auto px-0">
-            <div class="client_container">
-
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="box">
-                                <h4 style="color:cadetblue">
-                                    @Html.DisplayFor(model => model.Name)
-                                </h4>
-                                <div class="img-box">
-                                    <img src="@Url.Content(imglocation)" width="300" height="250" />
-                                </div>
-                                <div class="detail-box">
-                                    <p>
-                                        @Html.DisplayFor(model => model.Description)
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h4>Choose amount of scopes:</h4>
-    <p></p>
-    <div class="dropdown-divider"></div>
-    <p></p>
-
-    <div class="range-wrap">
-        <div class="range-value" id="rangeV"></div>
-        <input id="range" type="range" min="1" max="5" value="3" step="1">
-        <h3 id="priceVal"></h3>
-    </div>
-
-    <div>
-        <a onclick="@theprice =getElementById('priceVal').innerHTML" asp-controller="UserOrders" asp-action="Create" asp-route-tasteId="@Model.Id" asp-route-price="@theprice">continue order</a> |
-        <a asp-controller="IcecreamTastes" asp-action="Index">Back to List</a>
-    </div>
-
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Points</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Dom</td>
-                <td>6000</td>
-            </tr>
-            <tr class="active-row">
-                <td>Melissa</td>
-                <td>5150</td>
-            </tr>
-            <!-- and so on... -->
-        </tbody>
-    </table>
-
-</center>
 
 <script>
     const

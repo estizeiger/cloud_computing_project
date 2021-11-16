@@ -14,7 +14,7 @@
     <title>@ViewData["Title"] - Coldbergs</title>
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
 
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 
@@ -28,9 +28,9 @@
     <link href="../css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="../css/responsive.css" rel="stylesheet" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -57,10 +57,13 @@
                                 <a class="nav-link" asp-controller="Manager" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" asp-controller="Manager" asp-action="Menu">Update menu</a>
+                                <a class="nav-link" asp-controller="Manager" asp-action="Menu">Icecream Menu</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Manager" asp-action="Analysis">Consumption Analysis</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" asp-controller="Manager" asp-action="Prediction">Prediction</a>
                             </li>
                         </ul>
                     </div>

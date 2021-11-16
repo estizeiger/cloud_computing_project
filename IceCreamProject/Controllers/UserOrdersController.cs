@@ -10,6 +10,7 @@ using IceCreamProject.Models;
 
 using RestSharp;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace IceCreamProject.Controllers
 {
@@ -70,18 +71,27 @@ namespace IceCreamProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var regex = new Regex("^[A-Z|]+$");
                 var arr = userOrder.Address.Split(',');
-                var city = arr[1];
-                userOrder.Address = city;
+                foreach (var item in arr)
+                {
+                    if (regex.IsMatch(item))//if address in english letters
+                    {
+                        var city = arr[1];
+                        userOrder.Address = city;
 
+                        //enter weather details
+                        Main weather = findWeather(userOrder.Address);
+                        userOrder.FeelsLike = weather.feels_like;
+                        userOrder.Pressure = weather.pressure;
+                        userOrder.Humidity = weather.humidity;
+
+                    }
+                }
+               
                 userOrder.TasteId = _tasteId;
                 userOrder.Price=_price;
 
-                //enter weather details
-                Main weather = findWeather(userOrder.Address);
-                userOrder.FeelsLike = weather.feels_like;
-                userOrder.Pressure = weather.pressure;
-                userOrder.Humidity = weather.humidity;
                 //enter date and hour
                 DateTime date = DateTime.Now;
                 userOrder.Date = date;
@@ -90,9 +100,14 @@ namespace IceCreamProject.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Payment));
             }
             return View(userOrder);
+        }
+
+        public IActionResult Payment()
+        {
+            return View();
         }
 
         // GET: UserOrders/Edit/5

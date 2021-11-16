@@ -1,56 +1,47 @@
 ﻿@model IceCreamProject.Models.UserOrder
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Consumption Analysis";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
 
-    <!-- my styles for this template -->
-    <link href="~/css/mystyle.css" rel="stylesheet" />
-
-    var data = (IEnumerable<IceCreamProject.Models.Taste>)ViewData["Message"];
-
+    var titles = (List<string>)ViewData["Message"];
 }
 
-<div class="dropdown-divider">
-
+<div class="heading_container heading_center ">
+    <h1>Prediction</h1>
+    <h4>Choose an address and see what Icecream will be order most there, by temperature!</h4>
 </div>
-
-<h1>Icecream Order</h1>
-<hr />
 
 <section class="contact_section" style="background-color:lightblue">
     <div class="container" style="background-color:white">
-        <div class="row" >
+        <div class="row">
             <div class="col-md-6" style="background-color: lightblue">
                 <div class="form_container pr-lg-3">
 
-                    <form asp-action="Create">
+                    <form asp-action="Prediction">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div><p></p></div>
                         <div class="form-group">
-                            <label asp-for="UserName" class="control-label"></label>
-                            <input asp-for="UserName" class="form-control" placeholder="Enter your name"/>
-                            <span asp-validation-for="UserName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
                             <label asp-for="Address" class="control-label"></label>
-                            <input asp-for="Address" class="form-control" placeholder="Enter your location"/>
+                            <input asp-for="Address" class="form-control" placeholder="Enter an address" />
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
-                        <div>
-                            <input type="text" class="message-box" placeholder="Delivery Notes- optional" />
-                        </div>
+
                         <div class="form-group">
-                            <input type="submit" value="Pay with PayPal" class="btn btn-primary" />
+                            <input type="submit" value="predict" class="btn btn-primary" />
                         </div>
 
                     </form>
+
+                    <h3>The predicted Icecream is:</h3>
+                    <h3 style="color:black">@ViewBag.text</h3>
+
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="img-box">
-                    <img src="~/images/pricesTable.jpg" class="box_img" alt="prices table img" width="500" height="500" />
+                    <img src="~/images/icecreams/hoo.jpg" class="box_img" alt="prices table img" width="500" height="300" />
                 </div>
 
             </div>
@@ -58,6 +49,14 @@
         </div>
     </div>
 </section>
+
+<div class="heading_container heading_center ">
+    <h1>Consumption Analysis</h1>
+    <h4>Here is a graph describes how many orders from each taste were in the last year</h4>
+</div>
+
+<div id="columnchart_material"></div>
+
 
 @section Scripts {
 
@@ -101,12 +100,59 @@
         });
     </script>
 
-
-
     <script>
         function saveTasteIdPrice() {
             document.getElementById("demo").style.color = "red";
         }
     </script>
 
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(ajax_call);
+
+
+        function ajax_call(){
+            $.ajax({
+                url: '@Url.Action("getMonthData", "Manager")',
+                crossDomain: true,
+                success: function (result) {
+                    var jsonData = result;
+                    var arrData = JSON.parse(jsonData);
+                    console.log(arrData);
+                    data = google.visualization.arrayToDataTable(arrData);
+                    console.log(data);
+                    return drawChart(data);
+                }
+                //error: function (error) {
+                //    console.log('message Error' + JSON.stringify(error));
+                //}
+            });
+
+        }
+
+        function drawChart(_data) {
+
+            var options = {
+                chart: {
+                    title: 'Ice Cream Orders',
+                    subtitle: 'Orders of all tastes :2021',
+                },
+                //bars: 'vertical', // Required for Material Bar Charts.
+                //hAxis: { format: 'decimal' },
+                height: 400,
+                //colors: ['#1b9e77', '#d95f02', '#7570b3']
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(_data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 }
