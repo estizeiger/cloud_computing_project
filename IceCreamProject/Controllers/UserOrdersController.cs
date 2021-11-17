@@ -72,7 +72,7 @@ namespace IceCreamProject.Controllers
             bool correctAddress = true;
             if (ModelState.IsValid)
             {
-                var regex = new Regex("^[A-Z|]+$");
+                var regex = new Regex("^[.*\\sa-zA-Z|]+$");
                 var arr = userOrder.Address.Split(',');
                 foreach (var item in arr)
                 {

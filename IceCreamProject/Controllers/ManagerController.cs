@@ -408,7 +408,7 @@ namespace projectDesign.Controllers
             if (ModelState.IsValid)
             {
                 //find all needed fields:
-                var regex = new Regex("^[a-zA-Z|]+$");
+                var regex = new Regex("^[.*\\sa-zA-Z|]+$");
                 var arr = userFictionalOrder.Address.Split(',');
                 foreach (var item in arr)
                 {
