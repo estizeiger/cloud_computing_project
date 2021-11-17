@@ -15,6 +15,7 @@ using Firebase.Auth;
 using Firebase.Storage;
 using RestSharp;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace projectDesign.Controllers
 {
@@ -27,6 +28,8 @@ namespace projectDesign.Controllers
 
         private static int _tasteId;
 
+        private bool notIceCream;
+
         // Configure Firebase
         private static string ApiKey = "AIzaSyD715f3Vj0QgK6FuKqcx9Wn6kQcGAAjBJE";
         private static string Bucket = "cloud-computing-2fb12.appspot.com";
@@ -38,6 +41,18 @@ namespace projectDesign.Controllers
             _context = context;
             price = 18;
             _env = env;
+
+            notIceCream = false;
+        }
+
+        public IActionResult ManagerHome()
+        {
+            return View();
+        }
+
+        public IActionResult Oops()
+        {
+            return View("~/Views/Manager/Oops.cshtml");
         }
 
         // GET: Manager/Menu
@@ -156,10 +171,11 @@ namespace projectDesign.Controllers
         {
             if (ModelState.IsValid)
             {
-                _tasteId = icecreamTaste.Id;
 
                 _context.Add(icecreamTaste);
                 await _context.SaveChangesAsync();
+
+                _tasteId = icecreamTaste.Id;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -212,7 +228,7 @@ namespace projectDesign.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Menu));
             }
             return View(icecreamTaste);
         }
@@ -243,7 +259,7 @@ namespace projectDesign.Controllers
             var icecreamTaste = await _context.IcecreamTaste.FindAsync(id);
             _context.IcecreamTaste.Remove(icecreamTaste);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Menu));
         }
 
         private bool IcecreamTasteExists(int id)
@@ -259,6 +275,8 @@ namespace projectDesign.Controllers
 
         public IActionResult Index()
         {
+            if (notIceCream)
+                return View("~/Views/Manager/Oops.cshtml");
             return View();
         }
 
@@ -318,6 +336,7 @@ namespace projectDesign.Controllers
                             // Make changes on entity
                             entity.ImgLocation = url;
                             // Save changes in database
+                            //await _context.SaveChangesAsync();
                             _context.SaveChanges();
 
                         }
@@ -327,19 +346,30 @@ namespace projectDesign.Controllers
                         //delete the icecreamTaste that was added:
                         var addedIce = _context.IcecreamTaste.FirstOrDefault(m => m.Id == _tasteId);
                         _context.IcecreamTaste.Remove(addedIce);
+                        //await _context.SaveChangesAsync();
                         _context.SaveChanges();
-                        
+
                         //TextWrite("The image apploaded was not of an icecream!");
+                        //ModelState.AddModelError(nameof(IcecreamTaste.ImgLocation), "The image apploaded was not of an icecream! Please provide an ice-cream image");
+
+                        ViewData["ImageError"] = true;
+
+                        notIceCream = true;
+                        //return View("~/Views/Manager/Oops.cshtml");
+                        return RedirectToAction(nameof(Oops));
                     }
+
                     return Ok();
+                    //return null;
                 }
                 catch (Exception ex)
                 {
                     ViewBag.error = $"Exception was thrown: {ex}";
                 }
             }
-            
+
             return BadRequest();
+            //return null;
         }
 
         public ViewResult TextWrite(string ans)
@@ -374,37 +404,58 @@ namespace projectDesign.Controllers
         [ValidateAntiForgeryToken]
         public ViewResult Prediction([Bind("Id,TasteId,UserName,Address,Price,Date,FeelsLike,Pressure,Humidity")] UserOrder userFictionalOrder)
         {
+            bool correctAddress = true;
             if (ModelState.IsValid)
             {
                 //find all needed fields:
+                var regex = new Regex("^[a-zA-Z|]+$");
                 var arr = userFictionalOrder.Address.Split(',');
-                var city = arr[1];
-                userFictionalOrder.Address = city;
-
-                //enter weather details
-                Main weather = findWeather(userFictionalOrder.Address);
-                userFictionalOrder.FeelsLike = weather.feels_like;
-                userFictionalOrder.Pressure = weather.pressure;
-                userFictionalOrder.Humidity = weather.humidity;
-                //enter date and hour
-                DateTime date = DateTime.Now;
-                userFictionalOrder.Date = date;
-                int day = (int)date.DayOfWeek;
-
-                //predict:
-                double ans;
-                ans = PredictTasteid(userFictionalOrder.UserName, userFictionalOrder.FeelsLike, userFictionalOrder.Pressure, userFictionalOrder.Humidity, day, userFictionalOrder.Date.Day, userFictionalOrder.Date.Month);
-                int tasteId = (int)Math.Round(ans);
-
-                String tasteName = "example";
-                foreach (var item in _context.IcecreamTaste)
+                foreach (var item in arr)
                 {
-                    if (item.Id == tasteId)
+                    if (!regex.IsMatch(item))//if address in english letters
                     {
-                        tasteName = item.Name;
+                        correctAddress = false;
                     }
                 }
-                ViewBag.text =  tasteName;
+                if (correctAddress)
+                {
+                    var city = arr[1];
+                    userFictionalOrder.Address = city;
+
+                    //enter weather details
+                    Main weather = findWeather(userFictionalOrder.Address);
+                    userFictionalOrder.FeelsLike = weather.feels_like;
+                    userFictionalOrder.Pressure = weather.pressure;
+                    userFictionalOrder.Humidity = weather.humidity;
+
+                    //enter date and hour
+                    DateTime date = DateTime.Now;
+                    userFictionalOrder.Date = date;
+                    int day = (int)date.DayOfWeek;
+
+                    //predict:
+                    double ans;
+                    ans = PredictTasteid(userFictionalOrder.UserName, userFictionalOrder.FeelsLike, userFictionalOrder.Pressure, userFictionalOrder.Humidity, day, userFictionalOrder.Date.Day, userFictionalOrder.Date.Month);
+                    int tasteId = (int)Math.Round(ans);
+
+                    String tasteName = "example";
+                    foreach (var item in _context.IcecreamTaste)
+                    {
+                        if (item.Id == tasteId)
+                        {
+                            tasteName = item.Name;
+                        }
+                    }
+                    ViewBag.text = tasteName;
+                }
+                else//wrong address formate
+                {
+                    ViewBag.text = "Cannot Predict- Wrong Address format!";
+                    //return View("~/Views/Manager/Oops.cshtml");
+                }
+                    
+
+
                 return View();
             }
             ViewBag.text = "";

@@ -39,16 +39,23 @@ namespace projectDesign.Controllers
             return View();
         }
 
-        public IActionResult Login1(string Username, string Password)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login1([Bind("Id,UserName,Password")] User user)
         {
+            bool found = false;
             foreach (var item in _context.User)
             {
-                if (item.UserName == Username && item.Password == Password)
+                if (item.UserName == user.UserName && item.Password == user.Password)
                 {
-                    return View("~/Views/Manager/Index.cshtml");
+                    found = true;
+                    return View("~/Views/Manager/ManagerHome.cshtml");
                 }
             }
-            return View("~/Views/Manager/Index.cshtml");
+            if(!found)
+                return View("~/Views/Manager/Oops.cshtml");
+            else
+                return View("~/Views/Manager/ManagerHome.cshtml");
         }
 
         public IActionResult Add()

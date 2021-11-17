@@ -69,26 +69,31 @@ namespace IceCreamProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TasteId,UserName,Address,Price,Date,FeelsLike,Pressure,Humidity")] UserOrder userOrder)
         {
+            bool correctAddress = true;
             if (ModelState.IsValid)
             {
                 var regex = new Regex("^[A-Z|]+$");
                 var arr = userOrder.Address.Split(',');
                 foreach (var item in arr)
                 {
-                    if (regex.IsMatch(item))//if address in english letters
+                    if (!regex.IsMatch(item))//if address in english letters
                     {
-                        var city = arr[1];
-                        userOrder.Address = city;
-
-                        //enter weather details
-                        Main weather = findWeather(userOrder.Address);
-                        userOrder.FeelsLike = weather.feels_like;
-                        userOrder.Pressure = weather.pressure;
-                        userOrder.Humidity = weather.humidity;
-
+                        correctAddress = false;
                     }
                 }
-               
+
+                if(correctAddress)
+                {
+                    var city = arr[1];
+                    userOrder.Address = city;
+
+                    //enter weather details
+                    Main weather = findWeather(userOrder.Address);
+                    userOrder.FeelsLike = weather.feels_like;
+                    userOrder.Pressure = weather.pressure;
+                    userOrder.Humidity = weather.humidity;
+                }
+
                 userOrder.TasteId = _tasteId;
                 userOrder.Price=_price;
 

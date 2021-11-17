@@ -1,6 +1,10 @@
-﻿@{
+﻿@model IceCreamProject.Models.IcecreamTaste
+
+@{
     ViewData["Title"] = "Home Page- Manager";
     Layout = "~/Views/Shared/_Layout3.cshtml";
+
+    var imageError = ViewData["ImageError"];
 
 }
 
@@ -23,13 +27,17 @@
 <p></p>
 
 <h3 style="color:black">@ViewBag.text</h3>
+<h3 id="texti" style="color:black"></h3>
 
 <p></p>
 <p></p>
 <p></p>
 
 @section Scripts{
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
+
         $(document).ready(function () {
             let onchange = function () {
                 let _this = $(this)[0];
@@ -63,4 +71,12 @@
         });
     </script>
 
+    <script>
+        var a = "@imageError";
+        if (a == "true") {
+            document.getElementById('texti').innerText = "Error with picture";
+            alert("the image is not ice cream");
+        }
+
+    </script>
 }

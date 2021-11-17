@@ -1,5 +1,7 @@
-﻿using IceCreamProject.Models;
+﻿using IceCreamProject.Data;
+using IceCreamProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,17 @@ namespace IceCreamProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IceCreamProjectContext _context;//user
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IceCreamProjectContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        // GET: Consumer
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.IcecreamTaste.ToListAsync());
         }
 
         public IActionResult Privacy()
